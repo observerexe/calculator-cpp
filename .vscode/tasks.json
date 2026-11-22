@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "cmake configure",
+      "type": "shell",
+      "command": "cmake --preset debug",
+      "problemMatcher": []
+    },
+    {
+      "label": "cmake build",
+      "type": "shell",
+      "command": "cmake --build --preset debug",
+      "dependsOn": "cmake configure",
+      "problemMatcher": {
+        "base": "$gcc",
+        "fileLocation": ["autoDetect", "${workspaceFolder}/build/debug"]
+      },
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "build and run",
+      "type": "shell",
+      "command": "${workspaceFolder}/build/debug/${workspaceFolderBasename}",
+      "dependsOn": "cmake build",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true, "focus": true }
+    },
+    {
+      "label": "build release",
+      "type": "shell",
+      "command": "cmake --preset release && cmake --build --preset release",
+      "problemMatcher": {
+        "base": "$gcc",
+        "fileLocation": ["autoDetect", "${workspaceFolder}/build/release"]
+      }
+    },
+    {
+      "label": "clean",
+      "type": "shell",
+      "command": "rm -rf build",
+      "problemMatcher": []
+    }
+  ]
+}
